@@ -5,7 +5,7 @@
 
 class User{
     private $conn;
-    private $table = 'user';
+    private $table = 'Users';
 
     public function __construct($db){
         $this->conn = $db;
@@ -15,7 +15,7 @@ class User{
     //this method finds email
     public function findByEmail($email)
     {
-        $sql = "SELECT * FROM $this->table WHERE email = :email LIMIT 1";
+        $sql = "SELECT * FROM $this->table WHERE Email = :email LIMIT 1";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -25,8 +25,8 @@ class User{
 
     //register user
     public function create($firstName,$lastName,$role,$email,$phoneNumber,$address,$city,$country ,$password){
-        $sql = "INSERT INTO " . $this->table . " (firstName,lastName,role,email,phoneNumber,address,city,country,password)
-        VALUES (:firstName,lastName, :role, :email, :phoneNumber, :address, :city, :country, :password) ";
+        $sql = "INSERT INTO " . $this->table . " (FirstName,LastName,Role,Email,PhoneNumber,Address,City,Country,Password)
+        VALUES (:firstName,:lastName, :role, :email, :phoneNumber, :address, :city, :country, :password) ";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':firstName', $firstName);

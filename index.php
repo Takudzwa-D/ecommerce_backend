@@ -1,6 +1,7 @@
 <?php
 
-require_once 'config/database.php';
+// API Entry Point
+require_once __DIR__ . '/routes/api.php';
 
 
 

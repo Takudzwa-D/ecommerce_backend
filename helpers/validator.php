@@ -15,5 +15,5 @@ function isValidPhoneNumber($phone){
     return filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
 }
 function isValidPassword($password){
-    return filter_var($password, FILTER_SANITIZE_STRING);
+    return strlen($password) >= 6;
 }
