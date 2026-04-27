@@ -1,13 +1,35 @@
 <?php
 
-// CORS Headers
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Content-Type: application/json");
+/**
+ * CORS compatibility shim.
+ * Primary CORS values are defined in config/app.php.
+ */
 
-// Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
+if (!defined('CORS_ENABLED')) {
+    define('CORS_ENABLED', true);
 }
+
+if (!defined('CORS_ORIGINS')) {
+    define('CORS_ORIGINS', [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'http://127.0.0.1:3000',
+    ]);
+}
+
+if (!defined('CORS_METHODS')) {
+    define('CORS_METHODS', ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']);
+}
+
+if (!defined('CORS_HEADERS')) {
+    define('CORS_HEADERS', ['Content-Type', 'Authorization', 'Accept']);
+}
+
+if (!defined('CORS_CREDENTIALS')) {
+    define('CORS_CREDENTIALS', true);
+}
+
+if (!defined('CORS_MAX_AGE')) {
+    define('CORS_MAX_AGE', 86400);
+}
+

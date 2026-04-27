@@ -76,7 +76,7 @@ create table if not exists orders (
     customer_phone_number varchar(15) not null,
     customer_address varchar(255) not null,
     total_amount decimal(10, 2) not null,
-    status enum('Pending', 'Failed', 'Completed', 'Cancelled') default 'Pending',
+    status enum('Pending', 'Completed', 'Canceled', 'Failed') default 'Pending',
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
     foreign key (user_id) references Users(id) on delete cascade
@@ -101,6 +101,12 @@ create table if not exists payments (
     order_id int not null,
     payment_method enum('Credit Card', 'PayNow', 'Bank Transfer') not null,
     payment_status enum('Pending', 'Completed', 'Failed') default 'Pending',
+    merchant_reference varchar(100),
+    paynow_reference varchar(100),
+    poll_url varchar(255),
+    browser_url varchar(255),
+    payment_details text,
+    paid_at timestamp null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp on update current_timestamp,
     foreign key (order_id) references orders(id) on delete cascade
